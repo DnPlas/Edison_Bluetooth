@@ -22,8 +22,8 @@ class Profile(dbus.service.Object):
 		try:
 		    while True:
 		        data = server_sock.recv(1024)
-		        print("received: %s" % data)
-			server_sock.send("looping back: %s\n" % data)
+		        print("Smartphone says: %s" % data)
+			server_sock.send("Edison received: %s\n" % data)
 		except IOError:
 		    pass
 
