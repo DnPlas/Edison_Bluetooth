@@ -30,7 +30,7 @@ class Agent(dbus.service.Object):
 	@dbus.service.method(AGENT_INTERFACE,
 					in_signature="ou", out_signature="")
 	def RequestConfirmation(self, device, passkey):
-            print("Ensure this passkey matches with the one in your device: %06d" % passkey)
+            print("\nEnsure this passkey matches with the one in your device: %06d" % passkey)
             set_trusted(device)
 	    return
 
