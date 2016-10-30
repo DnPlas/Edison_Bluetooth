@@ -9,11 +9,7 @@ except ImportError:
 
 BUS_NAME = 'org.bluez'
 AGENT_INTERFACE = 'org.bluez.Agent1'
-AGENT_PATH = "/test/agent"
-
-bus = None
-device_obj = None
-dev_path = None
+PROFILE_INTERFACE = 'org.bluez.Profile1'
 
 def set_trusted(path):
     props = dbus.Interface(bus.get_object("org.bluez", path), "org.freedesktop.DBus.Properties")
@@ -22,17 +18,17 @@ def set_trusted(path):
 class Agent(dbus.service.Object):
     @dbus.service.method(AGENT_INTERFACE, in_signature="ou", out_signature="")
     def RequestConfirmation(self, device, passkey):
-        print("\nEnsure this passkey matches with the one in your device: %06d" % passkey)
+        print("\nEnsure this passkey matches with the one in your device: %06d\nPress [ENTER] to continue" % passkey)
         set_trusted(device)
         return
 
 class Profile(dbus.service.Object):
 	fd = -1
-	@dbus.service.method("org.bluez.Profile1",
-				in_signature="oha{sv}", out_signature="")
+	@dbus.service.method(PROFILE_INTERFACE, in_signature="oha{sv}", out_signature="")
 	def NewConnection(self, path, fd, properties):
 		self.fd = fd.take()
-		print("\nConnected to (%s, %d)" % (path, self.fd))
+                device_path = os.path.basename(path)
+		print("\nConnected to %s\nPress [ENTER] to continue" % device_path)
 
 		server_sock = socket.fromfd(self.fd, socket.AF_UNIX, socket.SOCK_STREAM)
 		server_sock.setblocking(1)
@@ -40,13 +36,11 @@ class Profile(dbus.service.Object):
 		try:
 		    while True:
 		        data = server_sock.recv(1024)
-		        #print("Smartphone says: %s" % data)
-			#server_sock.send("Edison received: %s" % data)
 		except IOError:
 		    pass
 
 		server_sock.close()
-		print("\nDisconnected")
+		print("\nYour device is now disconnected\nPress [ENTER] to continue")
 
 if __name__ == '__main__':
         
