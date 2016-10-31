@@ -1,0 +1,8 @@
+#!/bin/sh
+[Unit]
+Description=Sets up the Edison's Bluetooth interface.
+[Service]
+ExecStart=/home/root/Edison_Bluetooth/bluscript.sh
+Type=idle
+[Install]
+WantedBy=basic.target
