@@ -1,20 +1,28 @@
 #!/usr/bin/python
 
+# Python modules imports
 from optparse import OptionParser, make_option
+import pyupm_grove as g
 import os, sys, socket, uuid, dbus, dbus.service, dbus.mainloop.glib
 try:
   from gi.repository import GObject
 except ImportError:
   import gobject as GObject
 
+# Grove LED setup
+led = g.GroveLed(4)
+
+# Set up constants
 BUS_NAME = 'org.bluez'
 AGENT_INTERFACE = 'org.bluez.Agent1'
 PROFILE_INTERFACE = 'org.bluez.Profile1'
 
+# Trusted device function
 def set_trusted(path):
     props = dbus.Interface(bus.get_object("org.bluez", path), "org.freedesktop.DBus.Properties")
     props.Set("org.bluez.Device1", "Trusted", True)
 
+# Agent class
 class Agent(dbus.service.Object):
     @dbus.service.method(AGENT_INTERFACE, in_signature="ou", out_signature="")
     def RequestConfirmation(self, device, passkey):
@@ -22,6 +30,7 @@ class Agent(dbus.service.Object):
         set_trusted(device)
         return
 
+#Profile class
 class Profile(dbus.service.Object):
 	fd = -1
 	@dbus.service.method(PROFILE_INTERFACE, in_signature="oha{sv}", out_signature="")
@@ -36,6 +45,12 @@ class Profile(dbus.service.Object):
 		try:
 		    while True:
 		        data = server_sock.recv(1024)
+                        if data == '1':
+                            led.write(1)
+                        elif data == '0':
+                            led.write(0)
+                        else:
+                            server_sock.send("You must send 1 or 0")
 		except IOError:
 		    pass
 
