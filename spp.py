@@ -3,14 +3,14 @@
 # Python modules imports
 from optparse import OptionParser, make_option
 import pyupm_grove as g
-import os, sys, socket, uuid, dbus, dbus.service, dbus.mainloop.glib
+import os, sys, socket, uuid, dbus, dbus.service, dbus.mainloop.glib, led
 try:
   from gi.repository import GObject
 except ImportError:
   import gobject as GObject
 
 # Grove LED setup
-led = g.GroveLed(4)
+#led = g.GroveLed(4)
 
 # Set up constants
 BUS_NAME = 'org.bluez'
@@ -40,22 +40,31 @@ class Profile(dbus.service.Object):
 		print("\nConnected to %s\nPress [ENTER] to continue" % device_path)
 
 		server_sock = socket.fromfd(self.fd, socket.AF_UNIX, socket.SOCK_STREAM)
-		server_sock.setblocking(1)
+		#server_sock.setblocking(1)
+		server_sock.settimeout(1)
 		server_sock.send("Hello, this is Edison!")
 		try:
 		    while True:
-		        data = server_sock.recv(1024)
-                        if data == '1':
-                            led.write(1)
-                        elif data == '0':
-                            led.write(0)
-                        else:
-                            server_sock.send("You must send 1 or 0")
+                        try:
+                            data = server_sock.recv(1024)
+                            print ('Heres data %s' %data)
+                            led.funcion(data)
+                        except socket.timeout:
+                            print ('No data received')
+                            pass
+                        led.funcionx()
+                   #     if data == '1':
+                   #         led.write(1)
+                   #     elif data == '0':
+                   #         led.write(0)
+                   #     else:
+                   #         server_sock.send("You must send 1 or 0")
 		except IOError:
 		    pass
 
 		server_sock.close()
 		print("\nYour device is now disconnected\nPress [ENTER] to continue")
+                return self.data
 
 if __name__ == '__main__':
         

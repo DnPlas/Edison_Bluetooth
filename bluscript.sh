@@ -5,10 +5,10 @@
 /usr/bin/hciconfig hci0 up
 
 # Make Edison discoverable
-#bluetoothctl <<EOF
-#discoverable on
-#quit 
-#EOF
+bluetoothctl <<EOF
+discoverable on
+quit 
+EOF
 
 # Registers bluetooth agent and enables SPP
 python /home/root/Edison_Bluetooth/spp.py &
