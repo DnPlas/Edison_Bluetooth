@@ -40,7 +40,6 @@ class Profile(dbus.service.Object):
 		print("\nConnected to %s\nPress [ENTER] to continue" % device_path)
 
 		server_sock = socket.fromfd(self.fd, socket.AF_UNIX, socket.SOCK_STREAM)
-		#server_sock.setblocking(1)
 		server_sock.settimeout(1)
 		server_sock.send("Hello, this is Edison!")
 		try:
@@ -53,12 +52,6 @@ class Profile(dbus.service.Object):
                             print ('No data received')
                             pass
                         led.funcionx()
-                   #     if data == '1':
-                   #         led.write(1)
-                   #     elif data == '0':
-                   #         led.write(0)
-                   #     else:
-                   #         server_sock.send("You must send 1 or 0")
 		except IOError:
 		    pass
 
@@ -80,6 +73,7 @@ if __name__ == '__main__':
         profile_uuid = "1101"
 	profile = Profile(bus, profile_path)
 	profile_manager.RegisterProfile(profile_path, profile_uuid, auto_connect)
+
         # Agent config
         agent_capability = "KeyboardDisplay"
         agent_path = "/test/agent"
