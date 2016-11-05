@@ -9,9 +9,6 @@ try:
 except ImportError:
   import gobject as GObject
 
-# Grove LED setup
-#led = g.GroveLed(4)
-
 # Set up constants
 BUS_NAME = 'org.bluez'
 AGENT_INTERFACE = 'org.bluez.Agent1'
@@ -46,18 +43,15 @@ class Profile(dbus.service.Object):
 		    while True:
                         try:
                             data = server_sock.recv(1024)
-                            print ('Heres data %s' %data)
                             led.funcion(data)
                         except socket.timeout:
-                            print ('No data received')
                             pass
-                        led.funcionx()
+                        led.funcion(data)
 		except IOError:
 		    pass
 
 		server_sock.close()
 		print("\nYour device is now disconnected\nPress [ENTER] to continue")
-                return self.data
 
 if __name__ == '__main__':
         
