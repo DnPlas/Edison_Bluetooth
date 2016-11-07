@@ -17,7 +17,11 @@ EOF
 } > /dev/null
 
 # Registers bluetooth agent and enables SPP
-python /home/root/Edison_Bluetooth/spp.py &
+# Please, replace 'your-project' with the name
+# of the project you are working on:
+# python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
+# Default: gardening-system
+python /home/root/Edison_Bluetooth/projects/gardening-system/spp.py &
 
 # Print a message so the user knows when the script finished
 sleep 1
