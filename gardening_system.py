@@ -19,43 +19,38 @@ def displayLight():
         display.setColor(0,255,0)
 
 def function (data):
-    func = functionInUse.get(data)
+    func = functionInUse.get(data, dummy)
     func()
+
+def dummy():
+    pass
 
 def requestData():
     return str(light.value())
 
+def displayStatus(message):
+    display.clear()
+    display.setColor(0,0,255)
+    display.setCursor(0,2)
+    display.write(message)
+
 def waterPlant():
+    displayStatus('Watering')
     relay.off()
-    watering = 1
     sleep(1)
     relay.on()
-    sleep(60)
+    sleep(5)
     relay.off()
-    watering = 0
-    already_watered = 1
 
 def displayLightInfo():
+    display.clear()
     display.setCursor(0,0)
     display.write('Light:%s' % str(light.value()))
     sleep(1)
 
-def displayWateringInfo(watering, already_watered):
-    display.setCursor(1,0)
-    if watering:
-        display.write('Watering')
-    else:
-        if already_watered == 0:
-            display.write('Watered:NO')
-        elif already_watered:
-            display.write('Watered:YES')
+def myProgram(): 
+     displayLight()
+     displayLightInfo()
 
-
-if __name__ == '__main__':
-    
-    functionInUse = {'a' : waterPlant,
-                     'b' : requestData}
-    while True:
-        displayLight()
-        displayLightInfo()
-        displayWateringInfo(watering, already_watered)
+functionInUse = {'a' : waterPlant,
+                 'b' : requestData, }
