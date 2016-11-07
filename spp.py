@@ -45,12 +45,13 @@ class Profile(dbus.service.Object):
                         try:
                             data = server_sock.recv(1024)
                             gardening_system.function(data)
-                            server_sock.send(gardening_system.requestData())
+                            if data == 'b':
+                                server_sock.send(gardening_system.requestData())
                         except socket.timeout:
                             pass
+                        gardening_system.myProgram()
 		except IOError:
 		    pass
-
 		server_sock.close()
 
 if __name__ == '__main__':
