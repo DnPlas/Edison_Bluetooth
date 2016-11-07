@@ -3,7 +3,8 @@
 # Python modules imports
 from optparse import OptionParser, make_option
 import pyupm_grove as g
-import os, sys, socket, uuid, dbus, dbus.service, dbus.mainloop.glib, led
+import os, sys, socket, uuid, dbus, dbus.service
+import dbus.mainloop.glib, gardening_system
 try:
   from gi.repository import GObject
 except ImportError:
@@ -43,15 +44,14 @@ class Profile(dbus.service.Object):
 		    while True:
                         try:
                             data = server_sock.recv(1024)
-                            led.funcion(data)
+                            gardening_system.function(data)
+                            server_sock.send(gardening_system.requestData())
                         except socket.timeout:
                             pass
-                        led.funcion(data)
 		except IOError:
 		    pass
 
 		server_sock.close()
-		print("\nYour device is now disconnected\nPress [ENTER] to continue")
 
 if __name__ == '__main__':
         
