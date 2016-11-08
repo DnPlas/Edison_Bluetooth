@@ -22,9 +22,9 @@ Open ```bluscript.sh``` with your preferred text editor and edit line 24 so that
 That is:
 
 ```c
-root@edison # cd Edison_Bluetooth```
-root@edison # nano bluscript.sh```
-# Once the file is opened, replace 'your-project' with one of the options listed below.````
+root@edison # cd Edison_Bluetooth
+root@edison # nano bluscript.sh
+# Once the file is opened, replace 'your-project' with one of the options listed below.
 ...
 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
 ...
