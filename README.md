@@ -19,10 +19,11 @@ NOTE: Your board should be connected to a Wi-fi network, if you haven't set this
 Open ```bluscript.sh``` with your preferred text editor and edit line 24 so that it points to the project you'll be working with (default is set as "gardening-system").
 That is:
 
-*```root@edison # cd Edison_Bluetooth```
-*```root@edison # nano bluscript.sh```
-*```` # Once the file is opened, replace 'your-project' with one of the options listed below.````
-*``` 24 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &````
+```c
+root@edison # cd Edison_Bluetooth```
+root@edison # nano bluscript.sh```
+# Once the file is opened, replace 'your-project' with one of the options listed below.````
+24 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &````
 
 Save all changes and exit.
 
