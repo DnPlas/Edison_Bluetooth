@@ -31,17 +31,21 @@ python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
 ````
 
 Save all changes and exit.
+
 Options are:
 * temperature-monitor
 * gardening-system
 * hospital-assistant
 
-3.Run the BT setup script
+3.Run the BT setup script.
 
 ```c
 root@edison # ./bluscript.sh
+Wait for the Bluetooth setup to finish
+...
+Now can now pair your device with Edison
 ```
 
-4.Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
+4. Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
 
-5.Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
+5. Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
