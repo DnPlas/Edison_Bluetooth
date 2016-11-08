@@ -31,9 +31,7 @@ python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
 ````
 
 Save all changes and exit.
-
 Options are:
-
 * temperature-monitor
 * gardening-system
 * hospital-assistant
