@@ -19,6 +19,7 @@ root@edison # git clone https://github.com/DnPlas/Edison_Bluetooth.git
 2.Select the project you'll be working with and edit the BT setup script
 
 Open ```bluscript.sh``` with your preferred text editor and edit line 24 so that it points to the project you'll be working with (default is set as "gardening-system").
+
 That is:
 
 ```c
