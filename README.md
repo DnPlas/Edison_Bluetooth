@@ -39,7 +39,10 @@ Options are:
 * hospital-assistant
 
 3.Run the BT setup script
-```root@edison # ./bluscript.sh```
+
+```c
+root@edison # ./bluscript.sh
+```
 
 4.Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
 
