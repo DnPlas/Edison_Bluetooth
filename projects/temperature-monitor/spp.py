@@ -46,12 +46,10 @@ class Profile(dbus.service.Object):
 		    while True:
                         try:
                             data = server_sock.recv(1024)
-                            print ('Heres data %s' %data)
-                            led.funcion(data)
+                            led.BTfunction(data)
                         except socket.timeout:
-                            print ('No data received')
                             pass
-                        led.funcionx()
+                        led.temperatureFunction()
 		except IOError:
 		    pass
 
@@ -60,7 +58,7 @@ class Profile(dbus.service.Object):
                 return self.data
 
 if __name__ == '__main__':
-        
+
         # Generic dbus config
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 	bus = dbus.SystemBus()
