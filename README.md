@@ -12,7 +12,9 @@ Before starting, you should consider having:
 NOTE: Your board should be connected to a Wi-fi network, if you haven't set this up, please refer to the [Getting started guide] (https://software.intel.com/en-us/get-started-edison-windows)
 
 1. Clone Edison_Bluetooth
-```root@edison # git clone https://github.com/DnPlas/Edison_Bluetooth.git```
+```c
+root@edison # git clone https://github.com/DnPlas/Edison_Bluetooth.git
+```
 
 2. Select the project you'll be working with and edit the BT setup script
 
