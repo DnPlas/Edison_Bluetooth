@@ -1,5 +1,13 @@
 # Edison Bluetooth 
-This repository contains base code for creating IoT projects using an Intel Edison board + Arduino Expansion board and a Grove Starter Kit. You will find all what is needed for connecting the Intel Edison board to a device capable of communicating through Serial Port Profile (SPP) and sample projects that use the Grove Kit sensors/actuators.
+This repository contains base code for creating IoT projects using an Intel Edison board + Arduino Expansion board and a Grove Starter Kit. You will find all what is needed for connecting Edison to a device via Bluetooth and sample projects that use the Grove Kit sensors and actuators.
+
+Before starting, you should consider having:
+
+* Intel Edison board running the [Latest Yocto-Poky image] (https://software.intel.com/edison-image/latest)
+* Android or Windows device with [SPP] (https://learn.sparkfun.com/tutorials/bluetooth-basics/bluetooth-profiles) capabilities
+* [BluSPP](https://play.google.com/store/apps/details?id=com.shenyaocn.android.BlueSPP&hl=en) (Android) or [Bluetooth Serial Terminal](https://www.microsoft.com/en-us/store/p/bluetooth-serial-terminal/9wzdncrdfst8) (Windows) already installed
+* [Grove Starter Kit] (https://www.seeedstudio.com/Grove-starter-kit-plus---Intel-IoT-Edition-for-Intel-Galileo-Gen-2-and-Edison-p-1978.html#)
+
 
 ## Quickstart
 NOTE: Your board should be connected to a Wi-fi network, if you haven't set this up, pleas refer to the [Getting started guide] (https://software.intel.com/en-us/get-started-edison-windows)
