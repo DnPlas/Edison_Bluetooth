@@ -13,9 +13,9 @@ NOTE: Your board should be connected to a Wi-fi network, if you haven't set this
 ```root@edison # cd Edison_Bluetooth```
 Open ```bluscript.sh``` with your preferred text editor and replace "your-project" with the name of the project you'll be working with. 
 Default is set as "gardening-system". Options are:
-** gardening-system
-** temperature-monitor
-** hospital-assistant
+- gardening-system
+- temperature-monitor
+- hospital-assistant
 ```root@edison # nano bluscript.sh```
 
 3.Run the BT setup script
