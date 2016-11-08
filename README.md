@@ -23,7 +23,8 @@ That is:
 root@edison # cd Edison_Bluetooth```
 root@edison # nano bluscript.sh```
 # Once the file is opened, replace 'your-project' with one of the options listed below.````
-24 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &````
+24 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
+````
 
 Save all changes and exit.
 
