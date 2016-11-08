@@ -37,7 +37,7 @@ Options are:
 * gardening-system
 * hospital-assistant
 
-3.Run the BT setup script.
+3. Run the BT setup script.
 
 ```c
 root@edison # ./bluscript.sh
