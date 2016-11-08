@@ -11,12 +11,12 @@ Before starting, you should consider having:
 ## Quickstart
 NOTE: Your board should be connected to a Wi-fi network, if you haven't set this up, please refer to the [Getting started guide] (https://software.intel.com/en-us/get-started-edison-windows)
 
-1. Clone Edison_Bluetooth
+1.Clone Edison_Bluetooth
 ```c
 root@edison # git clone https://github.com/DnPlas/Edison_Bluetooth.git
 ```
 
-2. Select the project you'll be working with and edit the BT setup script
+2.Select the project you'll be working with and edit the BT setup script
 
 Open ```bluscript.sh``` with your preferred text editor and edit line 24 so that it points to the project you'll be working with (default is set as "gardening-system").
 That is:
@@ -37,7 +37,7 @@ Options are:
 * gardening-system
 * hospital-assistant
 
-3. Run the BT setup script.
+3.Run the BT setup script.
 
 ```c
 root@edison # ./bluscript.sh
@@ -46,6 +46,6 @@ Wait for the Bluetooth setup to finish
 Now can now pair your device with Edison
 ```
 
-4. Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
+4.Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
 
-5. Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
+5.Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
