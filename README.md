@@ -5,7 +5,7 @@ Before starting, you should consider having:
 
 * Intel Edison board running the [Latest Yocto-Poky image] (https://software.intel.com/edison-image/latest)
 * Android or Windows device with [SPP] (https://learn.sparkfun.com/tutorials/bluetooth-basics/bluetooth-profiles) capabilities
-* [BluSPP](https://play.google.com/store/apps/details?id=com.shenyaocn.android.BlueSPP&hl=en) (Android) or [Bluetooth Serial Terminal](https://www.microsoft.com/en-us/store/p/bluetooth-serial-terminal/9wzdncrdfst8) (Windows) already installed
+* [BlueSPP](https://play.google.com/store/apps/details?id=com.shenyaocn.android.BlueSPP&hl=en) (Android) or [Bluetooth Serial Terminal](https://www.microsoft.com/en-us/store/p/bluetooth-serial-terminal/9wzdncrdfst8) (Windows) already installed in your device
 * [Grove Starter Kit] (https://www.seeedstudio.com/Grove-starter-kit-plus---Intel-IoT-Edition-for-Intel-Galileo-Gen-2-and-Edison-p-1978.html#)
 
 
