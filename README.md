@@ -8,25 +8,29 @@ Before starting, you should consider having:
 * [BlueSPP](https://play.google.com/store/apps/details?id=com.shenyaocn.android.BlueSPP&hl=en) (Android) or [Bluetooth Serial Terminal](https://www.microsoft.com/en-us/store/p/bluetooth-serial-terminal/9wzdncrdfst8) (Windows) already installed in your device
 * [Grove Starter Kit] (https://www.seeedstudio.com/Grove-starter-kit-plus---Intel-IoT-Edition-for-Intel-Galileo-Gen-2-and-Edison-p-1978.html#)
 
-
 ## Quickstart
-NOTE: Your board should be connected to a Wi-fi network, if you haven't set this up, pleas refer to the [Getting started guide] (https://software.intel.com/en-us/get-started-edison-windows)
+NOTE: Your board should be connected to a Wi-fi network, if you haven't set this up, please refer to the [Getting started guide] (https://software.intel.com/en-us/get-started-edison-windows)
 
 1. Clone Edison_Bluetooth
-```root@edison # git clone https://github.com/DnPlas/Edison_Bluetooth.git```
+*```root@edison # git clone https://github.com/DnPlas/Edison_Bluetooth.git```
 
 2. Select the project you'll be working with and edit the BT setup script
 
-Open ```bluscript.sh``` with your preferred text editor and replace "your-project" with the name of the project you'll be working with (default is set as "gardening-system").
+Open ```bluscript.sh``` with your preferred text editor and edit line 24 so that it points to the project you'll be working with (default is set as "gardening-system").
+That is:
+
+*```root@edison # cd Edison_Bluetooth```
+*```root@edison # nano bluscript.sh```
+*```` # Once the file is opened, replace 'your-project' with one of the options listed below.````
+*``` 24 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &````
+
+Save all changes and exit.
 
 Options are:
 
-* Temperature monitor (temperature-monitor)
-* Gardening system (gardening-system)
-* Hospital assistant (hospital-assistant)
-
-```root@edison # cd Edison_Bluetooth```
-```root@edison # nano bluscript.sh```
+* temperature-monitor
+* gardening-system
+* hospital-assistant
 
 3.Run the BT setup script
 ```root@edison # ./bluscript.sh```
@@ -34,4 +38,3 @@ Options are:
 4.Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
 
 5.Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
-
