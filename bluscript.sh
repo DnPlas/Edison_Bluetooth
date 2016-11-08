@@ -10,9 +10,9 @@ sleep 2
 
 # Make Edison discoverable
 {
-	bluetoothctl <<EOF
- 	discoverable on
-	quit 
+bluetoothctl <<EOF
+discoverable on
+quit 
 EOF
 } > /dev/null
 
