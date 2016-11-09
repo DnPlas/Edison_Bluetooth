@@ -3,12 +3,14 @@
 # Python modules imports
 from optparse import OptionParser, make_option
 import pyupm_grove as g
-import os, sys, socket, uuid, dbus, dbus.service
-import dbus.mainloop.glib, gardening_system
+import os, sys, socket, uuid, dbus, dbus.service, dbus.mainloop.glib, led
 try:
   from gi.repository import GObject
 except ImportError:
   import gobject as GObject
+
+# Grove LED setup
+#led = g.GroveLed(4)
 
 # Set up constants
 BUS_NAME = 'org.bluez'
@@ -44,18 +46,19 @@ class Profile(dbus.service.Object):
 		    while True:
                         try:
                             data = server_sock.recv(1024)
-                            gardening_system.function(data)
-                            if data == 'b':
-                                server_sock.send(gardening_system.requestData())
+                            led.BTfunction(data)
                         except socket.timeout:
                             pass
-                        gardening_system.myProgram()
+                        led.temperatureFunction()
 		except IOError:
 		    pass
+
 		server_sock.close()
+		print("\nYour device is now disconnected\nPress [ENTER] to continue")
+                return self.data
 
 if __name__ == '__main__':
-        
+
         # Generic dbus config
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 	bus = dbus.SystemBus()
