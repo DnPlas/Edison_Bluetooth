@@ -57,8 +57,9 @@ def updateDisplay():
         displayInit(LCD_BACKGROUND_COLOR)
     else:
         displayInit(LCD_BACKGROUND_ALERT_COLOR)
-        displayMessage("*ADMINISTER PILL", 1, 0)
     displayMessage("Pills taken: %s" % str(pill_counter), 0, 0)
+    if pill_is_due:
+        displayMessage("*ADMINISTER PILL", 1, 0)
 
 
 def administerPill():
@@ -83,6 +84,7 @@ def toggleAlarm(alarmed):
 def resetCounter():
     global pill_counter
     pill_counter = 0
+    setNextPillTimer()
     updateDisplay()
     return str(SUCCESS_CODE)
 
@@ -137,12 +139,12 @@ def setNextPillTimer():
 
 
 def callFunction(fnc_id):
-    func = btFunctionList.get(fnc_id, dummy)
+    func = btFunctionList.get(fnc_id, returnError)
     return func()
 
 
-def dummy():
-    pass
+def returnError():
+    return "Error: Not valid code."
 
 
 def getPillCounter():

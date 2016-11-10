@@ -44,7 +44,8 @@ def processSockets(fd):
                 data = server_sock.recv(1024)
                 print ("Here's data %s" % data)
                 result = actions.callFunction(data)
-                server_sock.send(result)
+                if result:
+                    server_sock.send(result)
             except socket.timeout:
                 pass
     except IOError:
