@@ -40,6 +40,12 @@ alarm_status = OFF
 timer = None
 
 
+# -------------------------------------------------------------------------
+# LCD Functions
+# -------------------------------------------------------------------------
+# The objective of functions in this section is to set the color and clear
+# the LCD, and display the required messages to the user.
+# -------------------------------------------------------------------------
 def displayInit(color):
     display.setColor(*color)
     display.clear()
@@ -58,8 +64,16 @@ def updateDisplay():
     displayMessage("Pills taken: %s" % str(pill_counter), 0, 0)
     if pill_is_due:
         displayMessage("*ADMINISTER PILL", 1, 0)
+# -------------------------------------------------------------------------
 
 
+# -------------------------------------------------------------------------
+# Pill Administration Functions
+# -------------------------------------------------------------------------
+# In this code block there are the functions used to set and restart the
+# timer for pill administration, and to increase or reset the administrated
+# pill counter.
+# -------------------------------------------------------------------------
 def administerPill():
     global pill_counter
     pill_counter += 1
@@ -98,8 +112,15 @@ def getPillCounter():
 
 def getPillIsDueState():
     return str(pill_is_due)
+# -------------------------------------------------------------------------
 
 
+# -------------------------------------------------------------------------
+# Emergency Alarm Functions
+# -------------------------------------------------------------------------
+# These are the functions used to set and reset an emergency alarm, which
+# is shown to the user by turning a LED on or off.
+# -------------------------------------------------------------------------
 def toggleAlarm(alarmed):
     global alarm_status
 
@@ -123,8 +144,16 @@ def resetAlarm():
 
 def getAlarmStatus():
     return alarm_status_list[alarm_status]
+# -------------------------------------------------------------------------
 
 
+# -------------------------------------------------------------------------
+# Input Monitoring Functions
+# -------------------------------------------------------------------------
+# This section contains the function used to monitor the status of inputs,
+# in this case the push button and the touch sensor, and execute
+# the corresponding actions when their state changes.
+# -------------------------------------------------------------------------
 def checkButtonStatus():
     global pill_button_released
     global emergency_button_released
@@ -146,8 +175,15 @@ def checkButtonStatus():
     else:
         # wait for new input
         emergency_button_released = True
+# -------------------------------------------------------------------------
 
 
+# -------------------------------------------------------------------------
+# Bluetooth Functions
+# -------------------------------------------------------------------------
+# These functions and function dictionary are used to dynamically execute
+# different actions depending on the function ID received by Bluetooth.
+# -------------------------------------------------------------------------
 def callFunction(fnc_id):
     func = btFunctionList.get(fnc_id, returnError)
     return func()
@@ -164,8 +200,16 @@ btFunctionList = {'a': administerPill,
                   'e': getPillCounter,
                   'f': getAlarmStatus,
                   'g': getPillIsDueState}
+# -------------------------------------------------------------------------
 
 
+# -------------------------------------------------------------------------
+# Main Program Function
+# -------------------------------------------------------------------------
+# Finally, this is the main function that is executed continuously to
+# check for input events, after triggering the timer and LCD
+# initialization tasks.
+# -------------------------------------------------------------------------
 def myProgram():
     global initialized
 
@@ -176,6 +220,7 @@ def myProgram():
         initialized = True
 
     checkButtonStatus()
+# -------------------------------------------------------------------------
 
 
 if __name__ == "__main__":
