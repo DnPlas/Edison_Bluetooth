@@ -53,6 +53,7 @@ class Profile(dbus.service.Object):
 		except IOError:
 		    pass
 		server_sock.close()
+                print("\nYour device is now disconnected\nPress [ENTER] to continue")
 
 if __name__ == '__main__':
         
@@ -60,14 +61,6 @@ if __name__ == '__main__':
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 	bus = dbus.SystemBus()
         obj = bus.get_object(BUS_NAME, "/org/bluez");
-
-        # Profile config
-	profile_manager = dbus.Interface(obj, "org.bluez.ProfileManager1")
-        profile_path = "/foo/bar/profile"
-        auto_connect = {"AutoConnect": False}
-        profile_uuid = "1101"
-	profile = Profile(bus, profile_path)
-	profile_manager.RegisterProfile(profile_path, profile_uuid, auto_connect)
 
         # Agent config
         agent_capability = "KeyboardDisplay"
