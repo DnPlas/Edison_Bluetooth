@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# ---------- * IMPORT SECTION * ---------- #
+# ========== * IMPORT SECTION * ========== #
 
 # UPM Modules
 import pyupm_i2clcd as lcd
@@ -17,19 +17,19 @@ except ImportError:
     import gobject as GObject
 from time import sleep
 
-# ----------- * BT CONSTANTS * ----------- #
+# =========== * BT CONSTANTS * =========== #
 BUS_NAME = 'org.bluez'
 AGENT_INTERFACE = 'org.bluez.Agent1'
 PROFILE_INTERFACE = 'org.bluez.Profile1'
 
-# --------- * SETTING UP GPIOS * --------- #
+# ========= * SETTING UP GPIOS * ========= #
 light = g.GroveLight(0)
 display = lcd.Jhd1313m1(0, 0x3E, 0x62)
 relay = g.GroveRelay(4)
 
-# --------- * PROJECT FUNCTIONS * -------- #
+# ========= * PROJECT FUNCTIONS * ======== #
 
-# ============ LCD Functions ============= #
+# ------------ LCD Functions ------------- #
 
 # Display light sensor data
 def displayLightInfo():
@@ -54,7 +54,7 @@ def displayLight():
     elif light.value() >= 30:
         display.setColor(0,255,0)
 
-# ============= BT Functions ============= #
+#-------------  BT Functions -------------  #
     
 # Water your plant via BT
 def waterPlant():
@@ -69,7 +69,7 @@ def waterPlant():
 def requestData():
     return str(light.value())
 
-# =========== BT Communication ============ #
+#-----------  BT Communication ------------ #
 
 # BT dependent case function
 def function (data):
@@ -79,13 +79,13 @@ def function (data):
 functionInUse = {'a' : waterPlant,
                  'b' : requestData, }
 
-# ============ Project Program ============ #
-# Run all non-BT dependent functions
+# ------------ Project Program ------------ #
+# Run all non=BT dependent functions
 def myProgram():
       displayLight()
       displayLightInfo()
 
-# ----------- * BT MAIN LOOP * ------------ #
+# =========== * BT MAIN LOOP * ============ #
 
 if __name__ == '__main__':
   
