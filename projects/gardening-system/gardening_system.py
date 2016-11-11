@@ -80,7 +80,7 @@ functionInUse = {'a' : waterPlant,
                  'b' : requestData, }
 
 # ------------ Project Program ------------ #
-# Run all non=BT dependent functions
+# Run all non-BT dependent functions
 def myProgram():
       displayLight()
       displayLightInfo()
