@@ -30,15 +30,13 @@ alarm_led = grove.GroveLed(ALERT_LED)
 pill_button = grove.GroveButton(PILL_BUTTON)
 emergency_button = ttp.TTP223(EMERGENCY_BUTTON)
 
-# Initialize flags.
+# Initialize variables.
 initialized = False
 pill_counter = 0
 pill_is_due = False
 pill_button_released = True
 emergency_button_released = True
 alarm_status = OFF
-
-# Initialize variables.
 timer = None
 
 
@@ -70,6 +68,38 @@ def administerPill():
     return str(SUCCESS_CODE)
 
 
+def resetPillCounter():
+    global pill_counter
+    pill_counter = 0
+    setNextPillTimer()
+    updateDisplay()
+    return str(SUCCESS_CODE)
+
+
+def setPillIsDue():
+    global pill_is_due
+    pill_is_due = True
+    updateDisplay()
+
+
+def setNextPillTimer():
+    global pill_is_due
+    global timer
+    if timer:
+        timer.cancel()
+    timer = Timer(PILL_TIMER_LIMIT, setPillIsDue, ())
+    timer.start()
+    pill_is_due = False
+
+
+def getPillCounter():
+    return str(pill_counter)
+
+
+def getPillIsDueState():
+    return str(pill_is_due)
+
+
 def toggleAlarm(alarmed):
     global alarm_status
 
@@ -81,14 +111,6 @@ def toggleAlarm(alarmed):
         alarm_status = OFF
 
 
-def resetCounter():
-    global pill_counter
-    pill_counter = 0
-    setNextPillTimer()
-    updateDisplay()
-    return str(SUCCESS_CODE)
-
-
 def activateAlarm():
     toggleAlarm(ON)
     return str(SUCCESS_CODE)
@@ -97,6 +119,10 @@ def activateAlarm():
 def resetAlarm():
     toggleAlarm(OFF)
     return str(SUCCESS_CODE)
+
+
+def getAlarmStatus():
+    return alarm_status_list[alarm_status]
 
 
 def checkButtonStatus():
@@ -122,22 +148,6 @@ def checkButtonStatus():
         emergency_button_released = True
 
 
-def setPillIsDue():
-    global pill_is_due
-    pill_is_due = True
-    updateDisplay()
-
-
-def setNextPillTimer():
-    global pill_is_due
-    global timer
-    if timer:
-        timer.cancel()
-    timer = Timer(PILL_TIMER_LIMIT, setPillIsDue, ())
-    timer.start()
-    pill_is_due = False
-
-
 def callFunction(fnc_id):
     func = btFunctionList.get(fnc_id, returnError)
     return func()
@@ -147,21 +157,9 @@ def returnError():
     return "Error: Not valid code."
 
 
-def getPillCounter():
-    return str(pill_counter)
-
-
-def getAlarmStatus():
-    return alarm_status_list[alarm_status]
-
-
-def getPillIsDueState():
-    return str(pill_is_due)
-
-
 btFunctionList = {'a': administerPill,
                   'b': activateAlarm,
-                  'c': resetCounter,
+                  'c': resetPillCounter,
                   'd': resetAlarm,
                   'e': getPillCounter,
                   'f': getAlarmStatus,
