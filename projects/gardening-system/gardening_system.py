@@ -5,22 +5,10 @@
 # UPM Modules
 import pyupm_i2clcd as lcd
 import pyupm_grove as g
+from time import sleep
 
 # BT Needed Modules
 import spp as s
-from optparse import OptionParser, make_option
-import os, sys, socket, uuid, dbus, dbus.service
-import dbus.mainloop.glib, gardening_system
-try:
-      from gi.repository import GObject
-except ImportError:
-    import gobject as GObject
-from time import sleep
-
-# =========== * BT CONSTANTS * =========== #
-BUS_NAME = 'org.bluez'
-AGENT_INTERFACE = 'org.bluez.Agent1'
-PROFILE_INTERFACE = 'org.bluez.Profile1'
 
 # ========= * SETTING UP GPIOS * ========= #
 light = g.GroveLight(0)                 # Light sensor is connected to slot A0
@@ -86,22 +74,10 @@ def myProgram():
       displayLightInfo()
 
 # =========== * BT MAIN LOOP * ============ #
+def myThread():
+    while True:
+        myProgram()
+        sleep(1)
 
 if __name__ == '__main__':
-  
-    # dbus config
-    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-    bus = dbus.SystemBus()
-    obj = bus.get_object(BUS_NAME, "/org/bluez");
-    
-    # Profile config
-    profile_manager = dbus.Interface(obj, "org.bluez.ProfileManager1")
-    profile_path = "/foo/bar/profile"
-    auto_connect = {"AutoConnect": False}
-    profile_uuid = "1101"
-    profile = s.Profile(bus, profile_path)
-    profile_manager.RegisterProfile(profile_path, profile_uuid, auto_connect)
-    
-    # Mainloop
-    mainloop = GObject.MainLoop()
-    mainloop.run()
+    s.bluetoothConnection()

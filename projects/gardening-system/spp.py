@@ -55,6 +55,19 @@ class Profile(dbus.service.Object):
 		server_sock.close()
                 print("\nYour device is now disconnected\nPress [ENTER] to continue")
 
+def bluetoothConnection():
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    bus = dbus.SystemBus()
+    obj = bus.get_object(BUS_NAME, "/org/bluez");
+    profile_manager = dbus.Interface(obj, "org.bluez.ProfileManager1")
+    profile_path = "/foo/bar/profile"
+    auto_connect = {"AutoConnect": False}
+    profile_uuid = "1101"
+    profile = Profile(bus, profile_path)
+    profile_manager.RegisterProfile(profile_path, profile_uuid, auto_connect)
+    mainloop = GObject.MainLoop()
+    mainloop.run()
+
 if __name__ == '__main__':
         
         # Generic dbus config
