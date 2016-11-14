@@ -41,15 +41,6 @@ def temperatureFunction():
     # Read temperature and trigger alarm if necessary
     global led_flag
     temp = getTemperature()
-    if temp > MAX_TEMP:
-        triggerAlarm()
-    else:
-        disableAlarm()
-
-    # Adjust servo's angle
-    angle = MIN_ANGLE + ((temp-20) * 6)
-    angle = limitAngle(angle)
-    servo.setAngle(angle)
 
     # Debugging
     #print("Temperature: %d C\nAngle: %d" % (temp, angle))
@@ -66,8 +57,6 @@ def turnLedOff():
     """
 
     global led_flag
-    led.off()
-    led_flag = False
 
 def turnLedOn():
     """
@@ -75,36 +64,25 @@ def turnLedOn():
     """
 
     global led_flag
-    led.on()
-    led_flag = True
 
 def triggerAlarm():
     """
         Function will toogle led.
     """
-
-    if led_flag:
-        turnLedOff()
-    else:
-        turnLedOn()
+    pass
 
 def disableAlarm():
     """
         Function will turn the led off.
     """
-    if led_flag:
-        turnLedOff()
+    pass
 
 def limitAngle(angle):
     """
         Returns servo's angle within safe values.
     """
 
-    if angle < MIN_ANGLE:
-        return MIN_ANGLE
-    elif angle > MAX_ANGLE:
-        return MAX_ANGLE
-    return angle
+    pass
 
 #-----------  BT Communication ----------- #
 
@@ -121,7 +99,7 @@ def getStatus():
     """
         Prints status message in the screen.
     """
-    print("=== Status ===\nTemperature: %d C\n" % getTemperature())
+    pass
 
 def requestData():
     """
