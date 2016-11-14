@@ -74,10 +74,5 @@ def myProgram():
       displayLightInfo()
 
 # =========== * BT MAIN LOOP * ============ #
-def myThread():
-    while True:
-        myProgram()
-        sleep(1)
-
 if __name__ == '__main__':
     s.bluetoothConnection()
