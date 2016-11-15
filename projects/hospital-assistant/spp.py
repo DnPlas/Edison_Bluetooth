@@ -10,7 +10,7 @@ from threading import Thread
 
 import pyupm_grove as g
 
-import hospital_assistant as ha
+#import hospital_assistant as ha
 try:
     from gi.repository import GObject
 except ImportError:

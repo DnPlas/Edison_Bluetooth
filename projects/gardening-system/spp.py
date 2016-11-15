@@ -4,7 +4,7 @@
 from optparse import OptionParser, make_option
 import pyupm_grove as g
 import os, sys, socket, uuid, dbus, dbus.service
-import dbus.mainloop.glib, gardening_system
+import dbus.mainloop.glib#, gardening_system
 try:
   from gi.repository import GObject
 except ImportError:

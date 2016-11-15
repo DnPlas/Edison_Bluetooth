@@ -21,7 +21,9 @@ EOF
 # of the project you are working on:
 # python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
 # Default: gardening-system
-python /home/root/Edison_Bluetooth/projects/gardening-system/spp.py &
+# Options:
+# gardening-system | hospital-assistant | temperature-monitor
+python /home/root/Edison_Bluetooth/projects/hospital-assistant/spp.py &
 
 # Print a message so the user knows when the script finished
 sleep 1
