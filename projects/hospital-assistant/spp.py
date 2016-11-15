@@ -3,14 +3,14 @@
 # Python modules imports
 import os
 import socket
-import threading
 import dbus
 import dbus.service
 import dbus.mainloop.glib
+from threading import Thread
 
 import pyupm_grove as g
 
-import actions
+import hospital_assistant as ha
 try:
     from gi.repository import GObject
 except ImportError:
@@ -22,7 +22,6 @@ AGENT_INTERFACE = 'org.bluez.Agent1'
 PROFILE_INTERFACE = 'org.bluez.Profile1'
 
 closing = False
-
 
 def set_trusted(path):
     """Trusted device function"""
@@ -43,7 +42,7 @@ def processSockets(fd):
             try:
                 data = server_sock.recv(1024)
                 print ("Here's data %s" % data)
-                result = actions.callFunction(data)
+                result = ha.callFunction(data)
                 if result:
                     server_sock.send(result)
             except socket.timeout:
@@ -76,33 +75,43 @@ class Profile(dbus.service.Object):
 
         device_path = os.path.basename(path)
         print("\nConnected to %s\nPress [ENTER] to continue" % device_path)
-
-        socket_thread = threading.Thread(target=processSockets,
-                                         args=(self.fd,))
+        socket_thread = Thread(target=processSockets, args=(self.fd,))
         socket_thread.start()
         try:
-            while True:
-                actions.myProgram()
+            while not closing:
+                ha.myProgram()
         except IOError:
             pass
-
         closing = True
-        socket_thread.join(10)
+
         print("\nYour device is now disconnected\nPress [ENTER] to continue")
 
-if __name__ == '__main__':
-    # Generic dbus config
+
+def closeThreads():
+    global closing
+    closing = True
+
+def bluetoothConnection():
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
     obj = bus.get_object(BUS_NAME, "/org/bluez")
-
-    # Profile config
     profile_manager = dbus.Interface(obj, "org.bluez.ProfileManager1")
     profile_path = "/foo/bar/profile"
     auto_connect = {"AutoConnect": False}
     profile_uuid = "1101"
     profile = Profile(bus, profile_path)
     profile_manager.RegisterProfile(profile_path, profile_uuid, auto_connect)
+    mainloop = GObject.MainLoop()
+    try:
+        mainloop.run()
+    except (KeyboardInterrupt, SystemExit):
+        closeThreads()
+
+if __name__ == '__main__':
+    # Generic dbus config
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    bus = dbus.SystemBus()
+    obj = bus.get_object(BUS_NAME, "/org/bluez")
 
     # Agent config
     agent_capability = "KeyboardDisplay"

@@ -5,6 +5,9 @@ import pyupm_grove as grove
 import pyupm_i2clcd as lcd
 import pyupm_ttp223 as ttp
 
+# BT Needed Modules
+import spp as spp
+
 # Pins used in Grove kit.
 PILL_BUTTON = 2
 EMERGENCY_BUTTON = 3
@@ -82,14 +85,6 @@ def administerPill():
     return str(SUCCESS_CODE)
 
 
-def resetPillCounter():
-    global pill_counter
-    pill_counter = 0
-    setNextPillTimer()
-    updateDisplay()
-    return str(SUCCESS_CODE)
-
-
 def setPillIsDue():
     global pill_is_due
     pill_is_due = True
@@ -108,42 +103,6 @@ def setNextPillTimer():
 
 def getPillCounter():
     return str(pill_counter)
-
-
-def getPillIsDueState():
-    return str(pill_is_due)
-# -------------------------------------------------------------------------
-
-
-# -------------------------------------------------------------------------
-# Emergency Alarm Functions
-# -------------------------------------------------------------------------
-# These are the functions used to set and reset an emergency alarm, which
-# is shown to the user by turning a LED on or off.
-# -------------------------------------------------------------------------
-def toggleAlarm(alarmed):
-    global alarm_status
-
-    if alarmed:
-        alarm_led.on()
-        alarm_status = ON
-    else:
-        alarm_led.off()
-        alarm_status = OFF
-
-
-def activateAlarm():
-    toggleAlarm(ON)
-    return str(SUCCESS_CODE)
-
-
-def resetAlarm():
-    toggleAlarm(OFF)
-    return str(SUCCESS_CODE)
-
-
-def getAlarmStatus():
-    return alarm_status_list[alarm_status]
 # -------------------------------------------------------------------------
 
 
@@ -156,7 +115,6 @@ def getAlarmStatus():
 # -------------------------------------------------------------------------
 def checkButtonStatus():
     global pill_button_released
-    global emergency_button_released
 
     if pill_button.value():
         if pill_button_released:
@@ -166,15 +124,6 @@ def checkButtonStatus():
     else:
         # wait for new input
         pill_button_released = True
-
-    if emergency_button.value():
-        if emergency_button_released:
-            toggleAlarm(ON)
-            # avoid input until button is released
-            emergency_button_released = False
-    else:
-        # wait for new input
-        emergency_button_released = True
 # -------------------------------------------------------------------------
 
 
@@ -194,12 +143,7 @@ def returnError():
 
 
 btFunctionList = {'a': administerPill,
-                  'b': activateAlarm,
-                  'c': resetPillCounter,
-                  'd': resetAlarm,
-                  'e': getPillCounter,
-                  'f': getAlarmStatus,
-                  'g': getPillIsDueState}
+                  'b': getPillCounter}
 # -------------------------------------------------------------------------
 
 
@@ -224,5 +168,4 @@ def myProgram():
 
 
 if __name__ == "__main__":
-    while True:
-        myProgram()
+    spp.bluetoothConnection()
