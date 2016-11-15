@@ -48,7 +48,15 @@ Now can now pair your device with Edison
 
 4.Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
 
-5.Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
+5.You should now go to your project's directory and run the correspondant script to see your code in action. Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
+
+NOTE: You should run ```your-project.py``` first and then connect your devices using either BlueSPP or Bluetooth Serial Terminal, otherwise, you will get errors from the apps.
+```c
+root@edison # cd
+root@edison # cd Edison_Bluetooth/projects/your-project/
+root@edison # python your_project.py
+...
+```
 
 ## Projects
 TODO
