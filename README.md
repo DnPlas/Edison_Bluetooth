@@ -48,7 +48,7 @@ Now can now pair your device with Edison
 
 4.Pair your device with Edison. Generally, all you have to do is enter your device's Bluetooth settings and select 'edison' or 'Pair to edison'. Note that this step will change depending on your device.
 
-5.You should now go to your project's directory and run the correspondant script to see your code in action. Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect to your Edison and start communicating.
+5.You can see the code in action by going  into your project's directory and run the correspondant script. Using BluSPP (Android) or Bluetooth Sertial Terminal (Windows), connect your device to Edison and start communicating.
 
 NOTE: You should run ```your-project.py``` first and then connect your devices using either BlueSPP or Bluetooth Serial Terminal, otherwise, you will get errors from the apps.
 ```c
@@ -59,7 +59,17 @@ root@edison # python your_project.py
 ```
 
 ## Projects
-TODO
 ### Temperature monitor
+This system lets the user monitor the temperature of the room and get alerts when a threshold is reached.
+###### System characteristics
+* Temperature state
+  * Is shown in a gauge
+  * The user is able to know it via BT
+* If the threshold is reached/exceeded, an alarm goes on
+  * The alarm is a blinking LED
+  * The user is notified via BT
+* The system has a reset button
 ### Gardening system
+This is a remote controlled system that lets the user track and take actions over a mini-garden.
 ### Hospital asssitant
+This assistant tracks a patient's daily doses and alerts the nurse of emergency events.
