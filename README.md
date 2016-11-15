@@ -25,18 +25,17 @@ That is:
 ```c
 root@edison # cd Edison_Bluetooth
 root@edison # nano bluscript.sh
-# Once the file is opened, replace 'your-project' with one of the options listed below.
 ...
 python /home/root/Edison_Bluetooth/projects/your-project/spp.py &
 ...
+# Once the file is opened, replace 'your-project' with one of the options listed below.
 ````
-
-Save all changes and exit.
-
 Options are:
 * temperature-monitor
 * gardening-system
 * hospital-assistant
+
+Save all changes and exit.
 
 3.Run the BT setup script.
 
